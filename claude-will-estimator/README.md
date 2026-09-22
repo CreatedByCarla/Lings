@@ -25,8 +25,12 @@ form in this demo is front-end only (no backend wired up yet, see below).
 
 ## Staging preview
 
-A live preview is published here for client sign-off:
+Quick preview (Claude artifact, needs "Anyone with the link" sharing turned on
+by the owner):
 https://claude.ai/artifact/F4QNQ9SYjU1JY3FoekqZqY
+
+Live GitHub Pages preview (once enabled - see below), no sign-in required:
+https://createdbycarla.github.io/Lings/claude-will-estimator/
 
 ## Files
 
@@ -83,3 +87,22 @@ for reuse across multiple pages.
 - Colours: `#1E4D79` (primary/navy), `#01AED6` (accent/cyan), `#ffffff`,
   `#212738` (ink)
 - Fonts: Lato (headings) + Open Sans (body), loaded from Google Fonts
+
+## Turning on the live GitHub Pages link
+
+This repo is already pushed with everything Pages needs (a `.nojekyll` file
+at the root, and this folder). One-time setup, needs repo admin access:
+
+1. On GitHub, open **CreatedByCarla/Lings** → **Settings** → **Pages**
+   (left sidebar, under "Code and automation").
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. Under **Branch**, select `claude/amazing-mccarthy-dk960w` and folder
+   **/ (root)**, then **Save**.
+4. Wait 1-2 minutes - GitHub will show a green "Your site is live at..."
+   banner once it's published.
+5. The estimator will be live at:
+   `https://createdbycarla.github.io/Lings/claude-will-estimator/`
+
+Every future push to this branch will redeploy automatically. Once this
+work is merged into your default branch, you can point Pages at that branch
+instead.
