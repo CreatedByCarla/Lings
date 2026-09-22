@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Will Cost Estimator | Lings Solicitors</title>
+<meta name="description" content="Get an instant, no-obligation estimate for your Will in around 60 seconds.">
+<style>
+  :root{
+    --primary:#1E4D79;
+    --primary-dark:#15374F;
+    --accent:#01AED6;
+    --white:#ffffff;
+    --ink:#212738;
+    --bg:#F3F7FA;
+    --card:#ffffff;
+    --border:#DCE6EE;
+    --muted:#5B6B7C;
+    --success:#0E9F6E;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(33,39,56,.06), 0 8px 24px -12px rgba(33,39,56,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141A24;
+      --card:#1C2431;
+      --border:#2C3646;
+      --ink:#EAF0F6;
+      --muted:#9AACBE;
+      --white:#1C2431;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141A24;
+    --card:#1C2431;
+    --border:#2C3646;
+    --ink:#EAF0F6;
+    --muted:#9AACBE;
+    --white:#1C2431;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Open Sans', system-ui, sans-serif;
+    padding:32px 16px 48px;
+    min-height:100vh;
+  }
+  h1,h2,h3,.display{
+    font-family:'Lato', system-ui, sans-serif;
+    color:var(--ink);
+    text-wrap:balance;
+    margin:0;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+  }
+  .brandbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .brandmark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Lato',sans-serif;
+    font-weight:900;
+    font-size:15px;
+    letter-spacing:.02em;
+    color:var(--primary-dark);
+  }
+  :root[data-theme="dark"] .brandmark, @media (prefers-color-scheme:dark){ .brandmark{color:var(--ink);} }
+  .brandmark .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--primary));
+    flex:none;
+  }
+  .brand-tag{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:600;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  /* ---- intro ---- */
+  .intro{
+    padding:40px 32px 36px;
+    text-align:center;
+    background:
+      radial-gradient(120% 140% at 15% -10%, rgba(1,174,214,.16), transparent 55%),
+      radial-gradient(120% 140% at 100% 0%, rgba(30,77,121,.14), transparent 50%);
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--primary);
+    background:rgba(1,174,214,.12);
+    border:1px solid rgba(1,174,214,.28);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  :root[data-theme="dark"] .eyebrow,@media (prefers-color-scheme:dark){.eyebrow{color:var(--accent);} }
+  .intro h1{
+    font-size:clamp(26px,5vw,34px);
+    font-weight:900;
+    line-height:1.15;
+    max-width:22ch;
+    margin:0 auto 12px;
+  }
+  .intro p{
+    color:var(--muted);
+    font-size:16px;
+    max-width:36ch;
+    margin:0 auto 28px;
+    line-height:1.5;
+  }
+  .intro-meta{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-top:26px;
+    font-size:13px;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .intro-meta span{display:flex;align-items:center;gap:6px;}
+  .intro-meta svg{width:15px;height:15px;flex:none;color:var(--accent);}
+
+  /* ---- buttons ---- */
+  .btn{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    font-family:'Open Sans',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    border-radius:12px;
+    padding:15px 26px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  .btn-primary{
+    background:var(--primary);
+    color:#fff;
+    box-shadow:0 10px 24px -10px rgba(30,77,121,.55);
+  }
+  .btn-primary:hover{background:var(--primary-dark); transform:translateY(-1px);}
+  .btn-accent{
+    background:var(--accent);
+    color:#03303B;
+    box-shadow:0 10px 24px -10px rgba(1,174,214,.55);
+  }
+  .btn-accent:hover{filter:brightness(1.05); transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--primary);
+    border:1.5px solid var(--border);
+  }
+  :root[data-theme="dark"] .btn-ghost,@media (prefers-color-scheme:dark){.btn-ghost{color:var(--ink);} }
+  .btn-ghost:hover{border-color:var(--accent);}
+  .btn-block{width:100%;}
+  .btn[disabled]{opacity:.45; cursor:not-allowed; transform:none !important;}
+
+  /* ---- quiz chrome ---- */
+  .quiz-head{
+    padding:22px 28px 0;
+  }
+  .progress-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .progress-label{
+    font-size:13px;
+    font-weight:700;
+    color:var(--muted);
+  }
+  .progress-label b{color:var(--primary);}
+  :root[data-theme="dark"] .progress-label b,@media (prefers-color-scheme:dark){.progress-label b{color:var(--accent);} }
+  .progress-track{
+    height:8px;
+    border-radius:999px;
+    background:var(--border);
+    overflow:hidden;
+    margin-bottom:22px;
+  }
+  .progress-fill{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    transition:width .35s ease;
+    width:0%;
+  }
+
+  .quiz-body{padding:4px 28px 28px;}
+  .q-kicker{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .q-title{
+    font-size:clamp(19px,3.4vw,23px);
+    font-weight:800;
+    line-height:1.3;
+    margin-bottom:6px;
+  }
+  .q-help{
+    font-size:14.5px;
+    color:var(--muted);
+    line-height:1.55;
+    margin-bottom:20px;
+    max-width:52ch;
+  }
+  .q-help strong{color:var(--ink);}
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .opt{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    text-align:left;
+    width:100%;
+    background:var(--bg);
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    padding:15px 16px;
+    cursor:pointer;
+    font-family:'Open Sans',sans-serif;
+    color:var(--ink);
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .opt:hover{border-color:var(--accent);}
+  .opt:active{transform:scale(.994);}
+  .opt .mark{
+    flex:none;
+    width:22px;height:22px;
+    border-radius:50%;
+    border:2px solid var(--border);
+    background:var(--card);
+    display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .opt.checkbox .mark{border-radius:7px;}
+  .opt .mark svg{width:13px;height:13px;opacity:0;transform:scale(.5);transition:opacity .12s ease, transform .12s ease;color:#fff;}
+  .opt.selected{
+    border-color:var(--primary);
+    background:rgba(30,77,121,.07);
+  }
+  :root[data-theme="dark"] .opt.selected,@media (prefers-color-scheme:dark){.opt.selected{background:rgba(1,174,214,.1);} }
+  .opt.selected .mark{
+    border-color:var(--primary);
+    background:var(--primary);
+  }
+  .opt.selected .mark svg{opacity:1; transform:scale(1);}
+  .opt-text{flex:1;}
+  .opt-title{font-weight:700; font-size:15.5px; line-height:1.35;}
+  .opt-sub{font-size:13px; color:var(--muted); margin-top:2px; line-height:1.4;}
+
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:22px;
+  }
+  .nav-spacer{flex:1;}
+
+  /* ---- results ---- */
+  .result-hero{
+    padding:36px 28px 28px;
+    text-align:center;
+    background:linear-gradient(160deg,var(--primary) 0%,#123454 100%);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .result-hero::after{
+    content:"";
+    position:absolute; inset:-40% -10% auto auto;
+    width:260px;height:260px;
+    background:radial-gradient(circle,rgba(1,174,214,.55),transparent 70%);
+    filter:blur(10px);
+  }
+  .result-badge{
+    position:relative;
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .result-price{
+    position:relative;
+    font-family:'Lato',sans-serif;
+    font-weight:900;
+    font-size:clamp(38px,9vw,54px);
+    line-height:1;
+    letter-spacing:-.01em;
+  }
+  .result-price small{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:rgba(255,255,255,.75);
+    margin-top:10px;
+    text-transform:none;
+  }
+  .result-sub{
+    position:relative;
+    font-size:15px;
+    color:rgba(255,255,255,.88);
+    max-width:38ch;
+    margin:14px auto 0;
+    line-height:1.55;
+  }
+
+  .result-body{padding:26px 28px 30px;}
+  .result-section-title{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:12px;
+  }
+  .check-list{
+    list-style:none;
+    padding:0; margin:0 0 24px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .check-list li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:14.5px; line-height:1.5;
+  }
+  .check-list svg{flex:none; width:19px;height:19px; color:var(--success); margin-top:1px;}
+
+  .cross-sell{
+    background:rgba(1,174,214,.08);
+    border:1px solid rgba(1,174,214,.25);
+    border-radius:14px;
+    padding:16px 18px;
+    margin-bottom:22px;
+    font-size:14px;
+    line-height:1.55;
+  }
+  .cross-sell strong{color:var(--primary);}
+  :root[data-theme="dark"] .cross-sell strong,@media (prefers-color-scheme:dark){.cross-sell strong{color:var(--accent);} }
+
+  .cta-col{display:flex; flex-direction:column; gap:10px; margin-bottom:18px;}
+  .disclaimer{
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.6;
+    border-top:1px solid var(--border);
+    padding-top:16px;
+    margin-top:4px;
+  }
+
+  .email-box{
+    margin-top:16px;
+    border:1.5px dashed var(--border);
+    border-radius:14px;
+    padding:16px;
+  }
+  .email-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .email-row input{
+    flex:1 1 200px;
+    min-width:0;
+    border:1.5px solid var(--border);
+    background:var(--bg);
+    color:var(--ink);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:14.5px;
+    font-family:'Open Sans',sans-serif;
+  }
+  .email-row input:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  .email-note{font-size:12.5px; color:var(--muted); margin-top:8px;}
+  .email-success{
+    display:flex; align-items:center; gap:10px;
+    background:rgba(14,159,110,.1);
+    border:1px solid rgba(14,159,110,.3);
+    color:var(--success);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .email-success svg{flex:none;width:18px;height:18px;}
+
+  .restart{
+    text-align:center;
+    margin-top:18px;
+  }
+  .restart button{
+    background:none;border:none;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:600;
+    text-decoration:underline;
+    cursor:pointer;
+    font-family:'Open Sans',sans-serif;
+  }
+
+  [hidden]{display:none !important;}
+
+  @media (max-width:420px){
+    .intro{padding:32px 20px 28px;}
+    .quiz-head{padding:18px 18px 0;}
+    .quiz-body{padding:4px 18px 22px;}
+    .result-hero{padding:30px 20px 24px;}
+    .result-body{padding:22px 20px 26px;}
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="brandmark"><span class="dot"></span>Lings Solicitors</div>
+    <div class="brand-tag">Will Cost Estimator — demo</div>
+  </div>
+
+  <div class="panel">
+
+    <!-- INTRO -->
+    <section id="screen-intro" class="intro">
+      <span class="eyebrow">Free &amp; no obligation</span>
+      <h1>How much will my Will cost?</h1>
+      <p>Answer 7 quick questions and get an instant, no-obligation estimate — it takes about 60 seconds.</p>
+      <button class="btn btn-primary" id="btn-start">Get my estimate
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <div class="intro-meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>60 seconds</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>See your price first</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg>No email required</span>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="screen-quiz" hidden>
+      <div class="quiz-head">
+        <div class="progress-row">
+          <span class="progress-label">Question <b id="q-num">1</b> of 7</span>
+          <span class="progress-label" id="q-percent">14%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+      <div class="quiz-body">
+        <div class="q-kicker" id="q-kicker">About your Will</div>
+        <h2 class="q-title" id="q-title"></h2>
+        <p class="q-help" id="q-help"></p>
+        <div class="options" id="q-options"></div>
+
+        <div class="nav-row">
+          <button class="btn btn-ghost" id="btn-back">Back</button>
+          <div class="nav-spacer"></div>
+          <button class="btn btn-primary" id="btn-next">Next
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="screen-result" hidden>
+      <div class="result-hero">
+        <span class="result-badge" id="res-badge">Your estimate</span>
+        <div class="result-price" id="res-price">£300<small id="res-price-sub">including VAT</small></div>
+        <p class="result-sub" id="res-sub"></p>
+      </div>
+      <div class="result-body">
+        <div class="result-section-title" id="res-includes-title">This typically includes</div>
+        <ul class="check-list" id="res-includes"></ul>
+
+        <div class="cross-sell" id="res-crosssell" hidden></div>
+
+        <div class="cta-col">
+          <a class="btn btn-accent btn-block" id="btn-book" href="#" target="_blank" rel="noopener">Book your Will consultation</a>
+          <button class="btn btn-ghost btn-block" id="btn-email-toggle">Email me my estimate</button>
+        </div>
+
+        <div class="email-box" id="email-box" hidden>
+          <form id="email-form">
+            <div class="email-row">
+              <input type="email" id="email-input" placeholder="you@example.com" required aria-label="Your email address">
+              <button class="btn btn-primary" type="submit">Send</button>
+            </div>
+            <p class="email-note">We'll only use this to send your estimate and won't add you to any marketing list without your permission.</p>
+          </form>
+          <div class="email-success" id="email-success" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Sent — check your inbox for a copy of this estimate.</span>
+          </div>
+        </div>
+
+        <p class="disclaimer">This is an initial estimate based on the information you've provided and is not a contractual quotation. We'll confirm your fixed fee before beginning any work, and if your circumstances turn out to need additional advice, we'll always discuss this with you first.</p>
+
+        <div class="restart"><button id="btn-restart">Start again</button></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  var TICK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+
+  // ---------- question definitions ----------
+  var questions = [
+    {
+      id:'household',
+      kicker:'About your Will',
+      title:'Who is the Will for?',
+      help:'',
+      type:'single',
+      options:[
+        {value:'single', title:'Just me'},
+        {value:'couple', title:'Me and my partner', sub:'Mirror Wills for both of you'}
+      ]
+    },
+    {
+      id:'property',
+      kicker:'Your estate',
+      title:'Do you own a property?',
+      help:'',
+      type:'single',
+      options:[
+        {value:'none', title:'No'},
+        {value:'one', title:'Yes, one property'},
+        {value:'multiple', title:'Yes, more than one', sub:'This can add complexity to your Will'}
+      ]
+    },
+    {
+      id:'circumstances',
+      kicker:'Your family',
+      title:'Do any of these apply to you?',
+      help:'Select all that apply — this helps us understand whether extra protection or advice may be useful.',
+      type:'multi',
+      exclusiveValue:'none',
+      options:[
+        {value:'children_under_18', title:'I have children under 18'},
+        {value:'children_previous', title:'I have children from a previous relationship'},
+        {value:'vulnerable_dependant', title:'I have a dependant who is vulnerable or disabled'},
+        {value:'protect_right_to_live', title:"I want to protect someone's right to live in my property"},
+        {value:'none', title:'None of these'}
+      ]
+    },
+    {
+      id:'estate_wishes',
+      kicker:'Leaving your estate',
+      title:'How would you like to leave your estate?',
+      help:'',
+      type:'single',
+      options:[
+        {value:'simple', title:'Fairly simply', sub:'To my partner, family or children'},
+        {value:'specific_gifts', title:'I want to leave specific gifts as well', sub:'For example, items, sums of money or charity gifts'},
+        {value:'different_shares', title:'I want different beneficiaries to receive different shares'},
+        {value:'not_sure', title:"I'm not sure", sub:"I'd like advice"}
+      ]
+    },
+    {
+      id:'trust',
+      kicker:'Trusts explained',
+      title:'Do you think your Will may need a trust?',
+      help:'A trust can be useful if you want to protect a share of your home, provide for a vulnerable beneficiary, or control when or how someone inherits.',
+      type:'single',
+      options:[
+        {value:'no', title:'No'},
+        {value:'possibly', title:"Possibly", sub:"I'd like advice"},
+        {value:'yes', title:'Yes'}
+      ]
+    },
+    {
+      id:'complexity',
+      kicker:'A little more detail',
+      title:'Do you have any of the following?',
+      help:'These situations usually need bespoke advice rather than a fixed estimate.',
+      type:'multi',
+      exclusiveValue:'none',
+      options:[
+        {value:'business', title:'A business or shares in a private company'},
+        {value:'overseas', title:'Property or assets outside the UK'},
+        {value:'iht', title:'Significant assets where inheritance tax may be an issue'},
+        {value:'existing_trust', title:'An existing trust'},
+        {value:'none', title:'None of these'}
+      ]
+    },
+    {
+      id:'lpa',
+      kicker:'One last thing',
+      title:'Would you like to discuss a Lasting Power of Attorney as well?',
+      help:'An LPA lets someone you trust make decisions for you if you’re ever unable to — it’s separate from your Will but often arranged at the same time.',
+      type:'single',
+      options:[
+        {value:'no', title:'No'},
+        {value:'property', title:'Yes — Property & Financial Affairs'},
+        {value:'health', title:'Yes — Health & Welfare'},
+        {value:'both', title:'Yes — both'},
+        {value:'not_sure', title:"I'm not sure"}
+      ]
+    }
+  ];
+
+  var answers = {};
+  var current = 0;
+
+  // ---------- elements ----------
+  var screenIntro = document.getElementById('screen-intro');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+
+  var qNum = document.getElementById('q-num');
+  var qPercent = document.getElementById('q-percent');
+  var progressFill = document.getElementById('progress-fill');
+  var qKicker = document.getElementById('q-kicker');
+  var qTitle = document.getElementById('q-title');
+  var qHelp = document.getElementById('q-help');
+  var qOptions = document.getElementById('q-options');
+  var btnBack = document.getElementById('btn-back');
+  var btnNext = document.getElementById('btn-next');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenIntro.hidden = true;
+    screenQuiz.hidden = false;
+    render();
+  });
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = {};
+    current = 0;
+    screenResult.hidden = true;
+    screenIntro.hidden = false;
+  });
+
+  function render(){
+    var q = questions[current];
+    qNum.textContent = current + 1;
+    qPercent.textContent = Math.round(((current+1)/questions.length)*100) + '%';
+    progressFill.style.width = ((current)/questions.length*100) + '%';
+    requestAnimationFrame(function(){
+      progressFill.style.width = ((current+1)/questions.length*100) + '%';
+    });
+
+    qKicker.textContent = q.kicker;
+    qTitle.textContent = q.title;
+    qHelp.textContent = q.help;
+    qHelp.style.display = q.help ? 'block' : 'none';
+
+    qOptions.innerHTML = '';
+    var selected = answers[q.id] || (q.type === 'multi' ? [] : null);
+
+    q.options.forEach(function(opt){
+      var isChecked = q.type === 'multi' ? selected.indexOf(opt.value) > -1 : selected === opt.value;
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'opt' + (q.type==='multi' ? ' checkbox' : '') + (isChecked ? ' selected' : '');
+      el.innerHTML =
+        '<span class="mark">' + TICK_SVG + '</span>' +
+        '<span class="opt-text"><span class="opt-title">' + opt.title + '</span>' +
+        (opt.sub ? '<span class="opt-sub">' + opt.sub + '</span>' : '') + '</span>';
+      el.addEventListener('click', function(){ handleSelect(q, opt); });
+      qOptions.appendChild(el);
+    });
+
+    btnBack.style.visibility = current === 0 ? 'hidden' : 'visible';
+    updateNextState();
+  }
+
+  function handleSelect(q, opt){
+    if(q.type === 'single'){
+      answers[q.id] = opt.value;
+      render();
+      return;
+    }
+    // multi
+    var arr = answers[q.id] ? answers[q.id].slice() : [];
+    var idx = arr.indexOf(opt.value);
+    if(q.exclusiveValue && opt.value === q.exclusiveValue){
+      arr = idx > -1 ? [] : [opt.value];
+    } else {
+      if(q.exclusiveValue){
+        var exIdx = arr.indexOf(q.exclusiveValue);
+        if(exIdx > -1) arr.splice(exIdx,1);
+      }
+      if(idx > -1) arr.splice(idx,1); else arr.push(opt.value);
+    }
+    answers[q.id] = arr;
+    render();
+  }
+
+  function updateNextState(){
+    var q = questions[current];
+    var val = answers[q.id];
+    var answered = q.type === 'multi' ? (val && val.length > 0) : !!val;
+    btnNext.disabled = !answered;
+    btnNext.innerHTML = current === questions.length - 1
+      ? 'See my estimate <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+      : 'Next <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  }
+
+  btnNext.addEventListener('click', function(){
+    if(btnNext.disabled) return;
+    if(current < questions.length - 1){
+      current++;
+      render();
+    } else {
+      showResult();
+    }
+  });
+  btnBack.addEventListener('click', function(){
+    if(current === 0) return;
+    current--;
+    render();
+  });
+
+  // ---------- pricing logic ----------
+  // Three outcomes only: standard / trust / bespoke
+  var PRICES = {
+    standard: { single: 300, couple: 480, single_ex: 250, couple_ex: 400 },
+    trust:    { single: 510, couple: 750, single_lo:480, single_hi:540, couple_lo:720, couple_hi:780 }
+  };
+
+  function computeOutcome(){
+    var circumstances = answers.circumstances || [];
+    var complexity = answers.complexity || [];
+    var trust = answers.trust;
+
+    var complexityFlags = complexity.filter(function(v){ return v !== 'none'; });
+    if(complexityFlags.length > 0){
+      return 'bespoke';
+    }
+
+    var needsTrust =
+      trust === 'yes' ||
+      trust === 'possibly' ||
+      circumstances.indexOf('protect_right_to_live') > -1 ||
+      circumstances.indexOf('vulnerable_dependant') > -1 ||
+      circumstances.indexOf('children_previous') > -1 ||
+      (answers.property === 'multiple');
+
+    if(needsTrust) return 'trust';
+    return 'standard';
+  }
+
+  function moneyGBP(n){
+    return '£' + n.toLocaleString('en-GB');
+  }
+
+  function showResult(){
+    screenQuiz.hidden = true;
+    screenResult.hidden = false;
+
+    var isCouple = answers.household === 'couple';
+    var outcome = computeOutcome();
+
+    var badge = document.getElementById('res-badge');
+    var price = document.getElementById('res-price');
+    var priceSub = document.getElementById('res-price-sub');
+    var sub = document.getElementById('res-sub');
+    var includesTitle = document.getElementById('res-includes-title');
+    var includes = document.getElementById('res-includes');
+    var bookBtn = document.getElementById('btn-book');
+
+    includes.innerHTML = '';
+
+    function addIncludes(items){
+      items.forEach(function(t){
+        var li = document.createElement('li');
+        li.innerHTML = CHECK_SVG + '<span>' + t + '</span>';
+        includes.appendChild(li);
+      });
+    }
+
+    if(outcome === 'bespoke'){
+      badge.textContent = 'Tailored quote needed';
+      price.innerHTML = 'Let’s talk<small>Bespoke fixed-fee quote</small>';
+      sub.textContent = 'Based on your answers, your circumstances involve extra factors — such as a business, overseas assets, inheritance tax planning or an existing trust — that need a solicitor’s bespoke advice rather than a standard price.';
+      includesTitle.textContent = 'What happens next';
+      addIncludes([
+        'A short call with a solicitor to understand your situation',
+        'A clear, fixed-fee quote before any work begins',
+        'Specialist advice tailored to your assets and family circumstances'
+      ]);
+      bookBtn.textContent = 'Get a tailored quote';
+    } else if(outcome === 'trust'){
+      badge.textContent = 'Your estimate';
+      var lo = isCouple ? PRICES.trust.couple_lo : PRICES.trust.single_lo;
+      var hi = isCouple ? PRICES.trust.couple_hi : PRICES.trust.single_hi;
+      price.innerHTML = moneyGBP(lo) + '–' + moneyGBP(hi) + '<small>including VAT</small>';
+      sub.textContent = 'Based on your answers, it looks like ' + (isCouple ? 'your mirror Wills' : 'your Will') + ' may benefit from a straightforward trust to protect your home or provide for a dependant.';
+      includesTitle.textContent = 'This typically includes';
+      addIncludes([
+        'Initial consultation with a solicitor',
+        'Advice on your wishes, including whether a trust is right for you',
+        'Preparation of ' + (isCouple ? 'both Wills' : 'your Will') + ' with the appropriate trust',
+        'Amendments following your review',
+        'Signing guidance',
+        'Secure Will storage'
+      ]);
+      bookBtn.textContent = 'Book your Will consultation';
+    } else {
+      badge.textContent = 'Your estimate';
+      var amt = isCouple ? PRICES.standard.couple : PRICES.standard.single;
+      price.innerHTML = moneyGBP(amt) + '<small>including VAT</small>';
+      sub.textContent = 'Based on your answers, it looks like you may need ' + (isCouple ? 'a pair of straightforward mirror Wills.' : 'a straightforward single Will.');
+      includesTitle.textContent = 'This typically includes';
+      addIncludes([
+        'Initial consultation with a solicitor',
+        'Advice about your wishes',
+        'Preparation of ' + (isCouple ? 'both Wills' : 'your Will'),
+        'Amendments following your review',
+        'Signing guidance',
+        'Secure Will storage'
+      ]);
+      bookBtn.textContent = 'Book your Will consultation';
+    }
+
+    // LPA cross-sell
+    var crossSell = document.getElementById('res-crosssell');
+    var lpa = answers.lpa;
+    if(lpa && lpa !== 'no'){
+      var lpaText = {
+        property: 'a Property &amp; Financial Affairs LPA',
+        health: 'a Health &amp; Welfare LPA',
+        both: 'both a Property &amp; Financial Affairs LPA and a Health &amp; Welfare LPA',
+        not_sure: 'a Lasting Power of Attorney'
+      }[lpa] || 'a Lasting Power of Attorney';
+      crossSell.hidden = false;
+      crossSell.innerHTML = '<strong>Worth adding:</strong> You told us you’re interested in ' + lpaText + '. We’ll cover this during your consultation, alongside your Will price.';
+    } else {
+      crossSell.hidden = true;
+    }
+
+    bookBtn.href = '#book-consultation';
+
+    // reset email box
+    document.getElementById('email-box').hidden = true;
+    document.getElementById('email-form').hidden = false;
+    document.getElementById('email-success').hidden = true;
+    document.getElementById('email-input').value = '';
+    document.getElementById('btn-email-toggle').textContent = 'Email me my estimate';
+  }
+
+  document.getElementById('btn-email-toggle').addEventListener('click', function(){
+    var box = document.getElementById('email-box');
+    box.hidden = !box.hidden;
+  });
+
+  document.getElementById('email-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    // Demo only: no backend is wired up on this staging preview.
+    // In production this posts to Lings' CRM / email service (e.g. via a WordPress form plugin or Zapier webhook).
+    document.getElementById('email-form').hidden = true;
+    document.getElementById('email-success').hidden = false;
+  });
+
+})();
+</script>
+</body>
+</html>
