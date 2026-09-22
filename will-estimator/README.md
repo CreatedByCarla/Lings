@@ -30,7 +30,7 @@ by the owner):
 https://claude.ai/artifact/F4QNQ9SYjU1JY3FoekqZqY
 
 Live GitHub Pages preview (once enabled - see below), no sign-in required:
-https://createdbycarla.github.io/Lings/claude-will-estimator/
+https://createdbycarla.github.io/Lings/will-estimator/
 
 ## Files
 
@@ -101,8 +101,22 @@ at the root, and this folder). One-time setup, needs repo admin access:
 4. Wait 1-2 minutes - GitHub will show a green "Your site is live at..."
    banner once it's published.
 5. The estimator will be live at:
-   `https://createdbycarla.github.io/Lings/claude-will-estimator/`
+   `https://createdbycarla.github.io/Lings/will-estimator/`
 
 Every future push to this branch will redeploy automatically. Once this
 work is merged into your default branch, you can point Pages at that branch
 instead.
+
+### If you get a 404 after enabling Pages
+
+- **Repo visibility**: GitHub Pages on a *private* repo needs a paid plan
+  (Pro/Team/Enterprise) - on a free plan it only works on public repos.
+  Settings → General → Danger Zone shows/changes visibility.
+- **Still building**: check the **Actions** tab for a "pages build and
+  deployment" run - the very first deploy can take a few minutes.
+- **Wrong branch/folder saved**: re-check Settings → Pages shows
+  `claude/amazing-mccarthy-dk960w` and `/ (root)`, not a different branch.
+- **Trailing slash**: the folder needs the trailing slash -
+  `.../Lings/will-estimator/` not `.../Lings/will-estimator`.
+- Once Pages says "Your site is live at https://createdbycarla.github.io/Lings/",
+  the `/will-estimator/` path is just that base URL plus this folder name.
