@@ -108,16 +108,18 @@
     display:inline-flex;
     align-items:center;
     gap:6px;
-    font-size:12px;
+    font-size:13px;
     font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
+    letter-spacing:.01em;
     color:var(--primary);
     background:rgba(1,174,214,.12);
     border:1px solid rgba(1,174,214,.28);
-    padding:6px 14px;
-    border-radius:999px;
+    padding:8px 18px;
+    border-radius:14px;
     margin-bottom:18px;
+    max-width:34ch;
+    text-align:center;
+    line-height:1.4;
   }
   :root[data-theme="dark"] .eyebrow,@media (prefers-color-scheme:dark){.eyebrow{color:var(--accent);} }
   .intro h1{
@@ -464,16 +466,16 @@
 
   <div class="brandbar">
     <div class="brandmark"><span class="dot"></span>Lings Solicitors</div>
-    <div class="brand-tag">Will Cost Estimator — demo</div>
+    <div class="brand-tag">Will Cost Estimator - demo</div>
   </div>
 
   <div class="panel">
 
     <!-- INTRO -->
     <section id="screen-intro" class="intro">
-      <span class="eyebrow">Free &amp; no obligation</span>
+      <span class="eyebrow">Get a bespoke quote based on your Will writing requirements</span>
       <h1>How much will my Will cost?</h1>
-      <p>Answer 7 quick questions and get an instant, no-obligation estimate — it takes about 60 seconds.</p>
+      <p>Answer 7 quick questions and get an instant, no-obligation estimate - it takes about 60 seconds.</p>
       <button class="btn btn-primary" id="btn-start">Get my estimate
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
@@ -537,7 +539,7 @@
           </form>
           <div class="email-success" id="email-success" hidden>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Sent — check your inbox for a copy of this estimate.</span>
+            <span>Sent - check your inbox for a copy of this estimate.</span>
           </div>
         </div>
 
@@ -586,7 +588,7 @@
       id:'circumstances',
       kicker:'Your family',
       title:'Do any of these apply to you?',
-      help:'Select all that apply — this helps us understand whether extra protection or advice may be useful.',
+      help:'Select all that apply - this helps us understand whether extra protection or advice may be useful.',
       type:'multi',
       exclusiveValue:'none',
       options:[
@@ -641,13 +643,13 @@
       id:'lpa',
       kicker:'One last thing',
       title:'Would you like to discuss a Lasting Power of Attorney as well?',
-      help:'An LPA lets someone you trust make decisions for you if you’re ever unable to — it’s separate from your Will but often arranged at the same time.',
+      help:'An LPA lets someone you trust make decisions for you if you’re ever unable to - it’s separate from your Will but often arranged at the same time.',
       type:'single',
       options:[
         {value:'no', title:'No'},
-        {value:'property', title:'Yes — Property & Financial Affairs'},
-        {value:'health', title:'Yes — Health & Welfare'},
-        {value:'both', title:'Yes — both'},
+        {value:'property', title:'Yes - Property & Financial Affairs'},
+        {value:'health', title:'Yes - Health & Welfare'},
+        {value:'both', title:'Yes - both'},
         {value:'not_sure', title:"I'm not sure"}
       ]
     }
@@ -825,7 +827,7 @@
     if(outcome === 'bespoke'){
       badge.textContent = 'Tailored quote needed';
       price.innerHTML = 'Let’s talk<small>Bespoke fixed-fee quote</small>';
-      sub.textContent = 'Based on your answers, your circumstances involve extra factors — such as a business, overseas assets, inheritance tax planning or an existing trust — that need a solicitor’s bespoke advice rather than a standard price.';
+      sub.textContent = 'Based on your answers, your circumstances involve extra factors - such as a business, overseas assets, inheritance tax planning or an existing trust - that need a solicitor’s bespoke advice rather than a standard price.';
       includesTitle.textContent = 'What happens next';
       addIncludes([
         'A short call with a solicitor to understand your situation',
